@@ -9,5 +9,16 @@ Pod::Spec.new do |s|
   s.social_media_url  = 'https://twitter.com/ayushn21'
   s.license           = 'MIT'
   s.requires_arc      = true
-  s.source_files      = 'AvatarImageView/*.swift'
+
+  s.default_subspec = 'Core'
+
+  s.subspec 'Core' do |core|
+    core.source_files = 'AvatarImageView/*.swift'
+  end
+
+  s.subspec 'AppExtension' do |ext|
+    ext.source_files = 'AvatarImageView/*.swift'
+    # For app extensions, disabling code paths using unavailable API
+    ext.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'MYLIBRARY_APP_EXTENSIONS=1' }
+  end
 end
